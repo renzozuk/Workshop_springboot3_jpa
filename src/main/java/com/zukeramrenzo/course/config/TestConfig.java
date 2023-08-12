@@ -1,8 +1,17 @@
 package com.zukeramrenzo.course.config;
 
-import com.zukeramrenzo.course.entities.*;
+import com.zukeramrenzo.course.entities.Category;
+import com.zukeramrenzo.course.entities.Order;
+import com.zukeramrenzo.course.entities.OrderItem;
+import com.zukeramrenzo.course.entities.Payment;
+import com.zukeramrenzo.course.entities.Product;
+import com.zukeramrenzo.course.entities.User;
 import com.zukeramrenzo.course.entities.enums.OrderStatus;
-import com.zukeramrenzo.course.repositories.*;
+import com.zukeramrenzo.course.repositories.CategoryRepository;
+import com.zukeramrenzo.course.repositories.OrderItemRepository;
+import com.zukeramrenzo.course.repositories.OrderRepository;
+import com.zukeramrenzo.course.repositories.ProductRepository;
+import com.zukeramrenzo.course.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -67,5 +76,10 @@ public class TestConfig implements CommandLineRunner {
         OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 
         orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
+        Payment pay1 = new Payment(null, Instant.parse("2021-05-17T08:01:18Z"), o1);
+        o1.setPayment(pay1);
+
+        orderRepository.save(o1);
     }
 }
